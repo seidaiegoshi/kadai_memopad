@@ -12,7 +12,7 @@ const dummyDiary = [//!debug
     { num: 7, date: "2022/10/8(木)", memo: "fdsfsdfsdf" },
     { num: 8, date: "2022/10/9(木)", memo: "fdsfsdfsdf" },
     { num: 9, date: "2022/10/10(木)", memo: "fdsfsdfsdf" },
-    { num: 10, date: "2022/10/11(木)", memo: "gfjksdgjkdfsgdfkgjdffdasfjndsfkdsfldskfdsalfasdgpihjnfpgiodjfmgldkgndflkgndaflgkdnlkdfnds@kldnsgdslkgndsgkdsgmdlvsagdsalkvmdsglsgjsdfngjsfdgnsakfldsmfkldgndslkgndsgklsdngkldsnglkds:ngdkls:ngla:sgldksnglk:sdangkldsanglkdsnfdlksfndslkfdsondsgodsgnsogdslkagndsalgadgndaglndagjangagnadjgkndgkdagndagnd;gndklgndnfakgdfjgdlfs" },
+    { num: 10, date: "2022/11/1(水)", memo: "gfjksdgjkdfsgdfkgjdffdasfjndsfkdsfldskfdsalfasdgpihjnfpgiodjfmgldkgndflkgndaflgkdnlkdfnds@kldnsgdslkgndsgkdsgmdlvsagdsalkvmdsglsgjsdfngjsfdgnsakfldsmfkldgndslkgndsgklsdngkldsnglkds:ngdkls:ngla:sgldksnglk:sdangkldsanglkdsnfdlksfndslkfdsondsgodsgnsogdslkagndsalgadgndaglndagjangagnadjgkndgkdagndagnd;gndklgndnfakgdfjgdlfs" },
 ];
 
 const dummyTags = [
@@ -32,7 +32,6 @@ const dummyTags = [
 let numPage = 0;
 let allDiary = [];
 let allTags = [];
-let historyList = "";
 
 //日付取得
 const wd = ['日', '月', '火', '水', '木', '金', '土'];
@@ -45,12 +44,13 @@ const today = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getD
 //-------------
 
 const setHistoryList = () => {
+    let historyList = ""
     // 履歴リストを表示
     for (let i = allDiary.length - 1; i > allDiary.length - 11; i--) {//逆順に表示
         //リストに表示
         if (0 <= i) {
             if (allDiary[i].num && 0 <= i) {
-                historyList += "<li><p class=historyListDate>" + allDiary[i].num + ",\t" + allDiary[i].date + "</p>\t<p class='historyListMemo'>" + allDiary[i].memo + "</p></li>";//TODO :最後にnum消す
+                historyList += "<li><p class=historyListDate>" + allDiary[i].num + ",\t" + allDiary[i].date + "</p><p class=historyListTags>" + allDiary[i].tag + "</p><p class='historyListMemo'>" + allDiary[i].memo + "</p></li>";//TODO :最後にnum消す
             }
         }
     };
@@ -76,8 +76,6 @@ const initDisplay = () => {
         //ローカルストレージのデータを持ってくる
         allDiary = JSON.parse(localStorage.getItem("diary"));
 
-        // !debug
-        // allDiary = dummyDiary;
     }
 
     //登録済みタグのデータ取得
@@ -127,12 +125,11 @@ $("#recordButton").on("click", () => {
                     name: splittedTagsList[i],
                 })
             }
-
         }
     }
 
     //今日の日記をオブジェクト化
-    if (localStorage.getItem("diary")) {
+    if (allDiary[0]) {
         todayObject = {
             num: allDiary.length,
             date: today,
@@ -162,7 +159,10 @@ $("#recordButton").on("click", () => {
 
     //日記データをローカルストレージに入れる。
     setObjToLocalStorage("diary", allDiary);
+    // setObjToLocalStorage("diary", dummyDiary);//!debug
     setObjToLocalStorage("allTags", allTags);
+
+    initDisplay();
 
 });
 
