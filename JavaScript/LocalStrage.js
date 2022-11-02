@@ -32,31 +32,21 @@ const dummyTags = [
 let numPage = 0;
 let allDiary = [];
 let allTags = [];
-
 let historyList = "";
 
 //日付取得
 const wd = ['日', '月', '火', '水', '木', '金', '土'];
 const date = new Date();
-const today = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + "(" + wd[date.getDay()] + ")";
-$("#today").text(today);
+const today = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + "(" + wd[date.getDay()] + ")";
 
 
+//-------------
+//function
+//-------------
 
-
-//データ取得
-if (localStorage.getItem("diary")) {
-    //ローカルストレージのデータを持ってくる
-    //TODO 改行をちゃんと改行として認識するようにする。
-    allDiary = JSON.parse(localStorage.getItem("diary"));
-
-    // !debug
-    // allDiary = dummyDiary;
-
-    numPage = allDiary.length;
-
-    // 日記の内容を表示
-    for (let i = numPage - 1; i > numPage - 11; i--) {//逆順に表示
+const setHistoryList = () => {
+    // 履歴リストを表示
+    for (let i = allDiary.length - 1; i > allDiary.length - 11; i--) {//逆順に表示
         //リストに表示
         if (0 <= i) {
             if (allDiary[i].num && 0 <= i) {
@@ -65,22 +55,52 @@ if (localStorage.getItem("diary")) {
         }
     };
     $("#historyListItems").html(historyList);
+}
 
+const setTodayMemo = () => {
     //今日すでにメモを書いていたら、テキストエリア内に表示。
-    if (allDiary[numPage - 1].date == today) {
-        $("#inputTodayMemo").text(allDiary[numPage - 1].memo);
-        $("#inputTodayTags").text(allDiary[numPage - 1].tag);
-
+    if (allDiary[0]) {
+        if (allDiary[allDiary.length - 1].date == today) {
+            $("#inputTodayMemo").text(allDiary[allDiary.length - 1].memo);
+            $("#inputTodayTags").text(allDiary[allDiary.length - 1].tag);
+        }
     }
 }
 
-//タグのデータ取得
-if (localStorage.getItem("allTags")) {
-    allTags = JSON.parse(localStorage.getItem("allTags"));
-} else {
-    allTags = [];
-    allTags = dummyTags;
-};
+
+const initDisplay = () => {
+    $("#today").text(today);
+
+    //日記データ取得
+    if (localStorage.getItem("diary")) {
+        //ローカルストレージのデータを持ってくる
+        allDiary = JSON.parse(localStorage.getItem("diary"));
+
+        // !debug
+        // allDiary = dummyDiary;
+    }
+
+    //登録済みタグのデータ取得
+    if (localStorage.getItem("allTags")) {
+        allTags = JSON.parse(localStorage.getItem("allTags"));
+    } else {
+        allTags = [];
+        allTags = dummyTags;
+    };
+
+    setHistoryList();
+    setTodayMemo();
+}
+
+const setObjToLocalStorage = (key, ojb) => {
+    localStorage.setItem(key, JSON.stringify(ojb));
+}
+
+//-------------
+//処理ゾーン
+//-------------
+initDisplay();
+
 
 //-------------
 //ボタンを押したときの処理
@@ -88,26 +108,40 @@ if (localStorage.getItem("allTags")) {
 $("#recordButton").on("click", () => {
     const memo = $("#inputTodayMemo").val();
     const textAreaTag = $("#inputTodayTags").val();
-    const splittedTagsList = textAreaTag.split(" ");
 
     //新しいタグをタグリストに追加する。
+    const splittedTagsList = textAreaTag.split(/,|#|\s|\n|\t/);
     for (let i = 0; i < splittedTagsList.length; i++) {
-        duplicationIndex = splittedTagsList.indexOf(allTags[i].name);
-        //含まれていなかったら登録する。
-        if (duplicationIndex === -1) {
-            allTags.push({
-                num: allTags.length,
-                name: splittedTagsList[i],
-            })
+        if (splittedTagsList[i]) {//splitの連続による空白を除外
+            //記入したタグが既存のタグ一覧に存在するかどうか
+            let isExist = false;
+            for (let j = 0; j < allTags.length; j++) {
+                if (splittedTagsList[i] == allTags[j].name) {
+                    isExist = true;
+                }
+            }
+            //含まれていなかったら登録する。
+            if (!isExist) {
+                allTags.push({
+                    num: allTags.length,
+                    name: splittedTagsList[i],
+                })
+            }
+
         }
     }
 
-    //初めての投稿の場合
-    if (!localStorage.getItem("diary")) {
-        numPage = 0;
-    } else {
+    //今日の日記をオブジェクト化
+    if (localStorage.getItem("diary")) {
         todayObject = {
-            num: numPage,
+            num: allDiary.length,
+            date: today,
+            memo: memo,
+            tag: splittedTagsList,
+        };
+    } else {//初めて記録する場合
+        todayObject = {
+            num: 0,
             date: today,
             memo: memo,
             tag: splittedTagsList,
@@ -115,17 +149,20 @@ $("#recordButton").on("click", () => {
     }
 
     //今日の日記データを全日記配列に入れる。
-    if (allDiary[numPage - 1].date == today) {//日記配列に今日のデータを追加
-        allDiary[numPage - 1] = todayObject;
+    if (allDiary[0]) {
+        if (allDiary[allDiary.length - 1].date == today) {//日記配列に今日のデータを追加
+            allDiary[allDiary.length - 1] = todayObject;
+        }
+        else {
+            allDiary.push(todayObject);
+        }
     } else {
-        console.log(allDiary[numPage - 1].date);
-        console.log(today);
         allDiary.push(todayObject);
     }
 
     //日記データをローカルストレージに入れる。
-    localStorage.setItem("diary", JSON.stringify(allDiary));
-    localStorage.setItem("allTags", JSON.stringify(allTags));
+    setObjToLocalStorage("diary", allDiary);
+    setObjToLocalStorage("allTags", allTags);
 
 });
 
