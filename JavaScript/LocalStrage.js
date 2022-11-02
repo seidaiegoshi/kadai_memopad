@@ -88,6 +88,14 @@ const initDisplay = () => {
 
     setHistoryList();
     setTodayMemo();
+
+    //タグリスト処理
+    let htmlTagItems = "";
+    for (let i = 0; i < allTags.length; i++) {
+        htmlTagItems += "<li><input type='checkbox' id='boxTag" + i + "'><label for='boxTag" + i + "'>" + allTags[i].name + "</label></li>";
+    }
+    $("#tagCheckBox").html(htmlTagItems);
+
 }
 
 const setObjToLocalStorage = (key, ojb) => {
