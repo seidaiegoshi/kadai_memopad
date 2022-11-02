@@ -1,6 +1,3 @@
-//コメント追加
-// なんか追加
-
 // ゴミを消すよう
 // localStorage.removeItem("diary");
 // localStorage.removeItem("allTags");
