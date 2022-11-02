@@ -110,10 +110,6 @@ header {
     overflow-wrap: break-word;
 }
 
-.historyList li p {
-    /* border-bottom: 2px solid #eee; */
-}
-
 .historyListDate {
     color: gray;
     font-size: 0.5rem;

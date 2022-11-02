@@ -44,13 +44,21 @@ const today = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getD
 //-------------
 
 const setHistoryList = () => {
-    let historyList = ""
+    let historyList = "";
+    let tagItem = "";
+
     // 履歴リストを表示
     for (let i = allDiary.length - 1; i > allDiary.length - 11; i--) {//逆順に表示
         //リストに表示
         if (0 <= i) {
-            if (allDiary[i].num && 0 <= i) {
-                historyList += "<li><p class=historyListDate>" + allDiary[i].num + ",\t" + allDiary[i].date + "</p><p class=historyListTags>" + allDiary[i].tag + "</p><p class='historyListMemo'>" + allDiary[i].memo + "</p></li>";//TODO :最後にnum消す
+            if (allDiary[i].num) {
+                if (allDiary[i].tag) {
+                    tagItem = allDiary[i].tag;
+                } else {
+                    tagItem = "";
+                }
+
+                historyList += "<li><p class=historyListDate>" + allDiary[i].num + ",\t" + allDiary[i].date + "</p><p class=historyListTags>" + tagItem + "</p><p class='historyListMemo'>" + allDiary[i].memo + "</p></li>";//TODO :最後にnum消す
             }
         }
     };
