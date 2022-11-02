@@ -42,7 +42,6 @@ const today = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getD
 //-------------
 //function
 //-------------
-
 const setHistoryList = () => {
     let historyList = "";
     let tagItem = "";
@@ -75,7 +74,6 @@ const setTodayMemo = () => {
     }
 }
 
-
 const initDisplay = () => {
     $("#today").text(today);
 
@@ -83,7 +81,6 @@ const initDisplay = () => {
     if (localStorage.getItem("diary")) {
         //ローカルストレージのデータを持ってくる
         allDiary = JSON.parse(localStorage.getItem("diary"));
-
     }
 
     //登録済みタグのデータ取得
@@ -114,8 +111,6 @@ const setObjToLocalStorage = (key, ojb) => {
 //処理ゾーン
 //-------------
 initDisplay();
-
-
 //-------------
 //ボタンを押したときの処理
 //-------------

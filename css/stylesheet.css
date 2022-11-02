@@ -11,6 +11,10 @@ header {
 
 /* メニュー 
 -------------*/
+.menu {
+    margin-bottom: 10px;
+}
+
 .menu ul {
     display: flex;
     justify-content: flex-start;
@@ -66,6 +70,7 @@ header {
     background-color: #eee;
     height: 300px;
     overflow: scroll;
+    border: 1px solid #ccc;
 }
 
 #tagCheckBox {
