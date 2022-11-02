@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>diary</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/sanitize.css">
+  <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+
+<body>
+  <header>
+    <h1>diary</h1>
+  </header>
+
+  <main>
+    <div class="menu">
+      <ul class="menuList">
+        <li>テンプレートの編集</li>
+        <li>使い方</li>
+        <li>検索</li>
+        <li>日記の削除</li>
+      </ul>
+    </div>
+    <div class="todayMemoArea">
+      <div class="todayMemo">
+        <div><span id="today"></span>のメモ</div>
+        <textarea id="inputTodayMemo"></textarea>
+        <textarea id="inputTodayTags"></textarea>
+        <button id="recordButton">記録する</button>
+      </div>
+    </div>
+
+    <div class="history">
+      <div>Story of my life</div>
+
+      <!-- <div>切り替えボタン</div> -->
+      <div class="switchView">
+        <div class="historyList">
+          <ul id="historyListItems"></ul>
+        </div>
+        <!-- <div class="historyCalender">過去のメモカレンダー表示</div> -->
+      </div>
+    </div>
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="JavaScript/LocalStrage.js"></script>
+</body>
+
+</html>

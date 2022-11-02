@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* ヘッダー
+-------------*/
+header {
+    margin: 0px auto;
+}
+
+/* メニュー 
+-------------*/
+.menu ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menuList li {
+    padding: 0 10px;
+    margin: 0 5px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+/* 今日の日記ゾーン
+-------------*/
+
+.todayMemoArea {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.todayMemo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.todayMemo #inputTodayMemo {
+    width: 500px;
+    height: 200px;
+    padding: 2px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.todayMemo #inputTodayTags {
+    padding: 2px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.todayMemo button {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1px 3px;
+    margin: 5px;
+}
+
+
+
+/* 過去メモ 
+-------------*/
+.history {
+    /* background-color: #eee; */
+    margin: 10px;
+}
+
+/* リスト表示 */
+.historyList {
+    max-width: 80%;
+}
+
+.historyList li {
+    border-bottom: 2px solid #eee;
+    overflow-wrap: break-word;
+}
+
+.historyList li p {
+    /* border-bottom: 2px solid #eee; */
+}
+
+.historyListDate {
+    color: gray;
+    font-size: 0.5rem;
+}
