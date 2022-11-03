@@ -52,14 +52,39 @@ memoBefore = $("#inputTodayMemo").val();
 initDisplay();
 initSelectedTagArea();
 
+
 //-------------
-//ボタン監視ゾーン
+//グローバルメニュー周りの監視ゾーン
 //-------------
+
+//日記削除ボタン
+$("#delStorage").on("click", () => {
+    const result = confirm('今までのをコピーしてどっか保存した？');
+    if (result) {
+        localStorage.removeItem("diary");
+        localStorage.removeItem("allTags");
+        location.reload();
+    }
+
+});
+
+$("#debugDummy").on("click", () => {//!debug
+    setObjToLocalStorage("diary", dummyDiary);
+    setObjToLocalStorage("allTags", dummyTags);
+    location.reload();
+})
+
+
+//-------------
+//記録ボタン周りの監視ゾーン
+//-------------
+
+
 //「記録する」ボタンを押したときの処理
 $("#buttonRecord").on("click", () => {
     const memo = $("#inputTodayMemo").val();
     setTagSelected();
-
+    // console.log(allDiary[0]);
     //今日の日記をオブジェクト化
     if (allDiary[0]) {
         todayObject = {
@@ -69,6 +94,7 @@ $("#buttonRecord").on("click", () => {
             tag: tagSelected,
         };
     } else {//初めて記録する場合
+        // console.log("test");
         todayObject = {
             num: 0,
             date: today,
@@ -97,14 +123,10 @@ $("#buttonRecord").on("click", () => {
 
     initDisplay();
     initSelectedTagArea();
+    initDisplay();
 
 
-});
 
-// タグをせんたくしたときの処理
-$("[name='tagGroup']").change(() => {
-    setTagSelected();
-    $("#buttonRecord").prop("disabled", false);
 });
 
 
@@ -113,29 +135,31 @@ $("#inputTodayMemo").on("input", () => {
     $("#buttonRecord").prop("disabled", false);
 });
 
-//日記削除ボタン
-$("#delStorage").on("click", () => {
-    const result = confirm('今までのをコピーしてどっか保存した？');
-    if (result) {
-        localStorage.removeItem("diary");
-        localStorage.removeItem("allTags");
-        location.reload();
-    }
 
+
+//-------------
+//タグボタン周りの監視ゾーン
+//-------------
+
+
+// タグをせんたくしたときの処理
+$("[name='tagGroup']").change(() => {
+    setTagSelected();
+    $("#buttonRecord").prop("disabled", false);
 });
 
-$("#debugDummy").on("click", () => {//!debug
-    setObjToLocalStorage("diary", dummyDiary);
-    setObjToLocalStorage("allTags", dummyTags);
-    location.reload();
-})
+//タグが変更されたらタグ追加ボタンを有効にする。
+$("#inputTodayTags").on("input", () => {
+    $("#buttonAddTag").prop("disabled", false);
+});
 
+// タグ追加ボタン押したときの処理
 $("#buttonAddTag").on("click", () => {
     //入力したタグが存在しなかったらタグ一覧に追加する。
     let isExist = false;
     allTags.forEach(at => {
         isIncluded = at.name.indexOf($("#inputTodayTags").val());
-        console.log(isIncluded);
+        // console.log(isIncluded);
         if (isIncluded != -1) {
             isExist = true;
         }
@@ -159,9 +183,3 @@ $("#buttonAddTag").on("click", () => {
         $("#buttonRecord").prop("disabled", false);
     });
 });
-
-//タグが変更されたらタグ追加ボタンを有効にする。
-$("#inputTodayTags").on("input", () => {
-    $("#buttonAddTag").prop("disabled", false);
-});
-
