@@ -1,0 +1,24 @@
+body {
+    margin: 10px
+}
+
+h1 {
+    color: #333;
+    margin-top: 50px;
+}
+
+div {
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+p {
+    margin: 7px 0px;
+}
+
+li::before {
+    content: "▶ ";
+    width: 5px;
+
+    height: 5px;
+}
