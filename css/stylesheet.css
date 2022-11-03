@@ -102,10 +102,21 @@ header {
 }
 
 #buttonAddTag {
-    border: 1px solid black;
-    border-radius: 5px;
     padding: 1px 3px;
     margin: 5px;
+    border-top: 3px solid rgb(81, 180, 255);
+    border-right: 3px solid rgb(81, 180, 255);
+    border-left: 3px solid rgb(0, 109, 193);
+    border-bottom: 3px solid rgb(0, 109, 193);
+    border-radius: 5px;
+    background-color: rgb(0, 140, 247);
+    color: white;
+}
+
+#buttonAddTag:disabled {
+    border: 1px solid #ccc;
+    background-color: #eee;
+    color: #777;
 }
 
 #tagCheckBox {

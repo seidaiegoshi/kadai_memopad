@@ -113,6 +113,7 @@ $("#inputTodayMemo").on("input", () => {
     $("#buttonRecord").prop("disabled", false);
 });
 
+//日記削除ボタン
 $("#delStorage").on("click", () => {
     const result = confirm('今までのをコピーしてどっか保存した？');
     if (result) {
@@ -149,5 +150,18 @@ $("#buttonAddTag").on("click", () => {
     setObjToLocalStorage("allTags", allTags);
     initDisplay();
     initSelectedTagArea();
-})
+    $("#inputTodayTags").val("");
+    $("#buttonAddTag").prop("disabled", true);
+
+    //タグ追加後に以下の監視が一旦消えてしまうのでゴリ押し。 もっといいやり方がある・・・？
+    $("[name='tagGroup']").change(() => {
+        setTagSelected();
+        $("#buttonRecord").prop("disabled", false);
+    });
+});
+
+//タグが変更されたらタグ追加ボタンを有効にする。
+$("#inputTodayTags").on("input", () => {
+    $("#buttonAddTag").prop("disabled", false);
+});
 

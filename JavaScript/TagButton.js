@@ -33,14 +33,21 @@ const recordAllTags = () => {
     }
 }
 
+//
 const initSelectedTagArea = () => {
+
+    //タグ一覧を表示する
+    let htmlTagItems = "";
+    for (let i = 0; i < allTags.length; i++) {
+        htmlTagItems += "<li><input type='checkbox' name='tagGroup' id='boxTag" + i + "' value=" + allTags[i].name + "><label for='boxTag" + i + "'>" + allTags[i].name + "</label></li>";
+    }
+    $("#tagCheckBox").html(htmlTagItems);
+
+    //タグ一覧にチェックをつける
     let allTagArr = [];
     if (allDiary[0]) {
-
         const todayTagList = allDiary[allDiary.length - 1].tag;
         // console.log(todayTagList);
-
-
 
         $('#tagCheckBox').find('label').each(function (index, element) {
             allTagArr.push(element.textContent);
