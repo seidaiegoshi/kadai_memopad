@@ -8,6 +8,7 @@ let tagSelected = [];
 //method
 //-------------
 //新しいタグをタグリストに追加する。
+//!これ使ってない
 const recordAllTags = () => {
 
     const textAreaTag = $("#inputTodayTags").val();

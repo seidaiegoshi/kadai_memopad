@@ -1,9 +1,6 @@
-
-
 //-------------
 //初期化処理
 //-------------
-let numPage = 0;
 let allDiary = [];
 let allTags = [];
 
@@ -22,12 +19,13 @@ const setHistoryList = () => {
 
     // console.log(allDiary);
     // 履歴リストを表示
-    for (let i = allDiary.length - 1; i > allDiary.length - 11; i--) {//逆順に表示
+    // for (let i = allDiary.length - 1; i > allDiary.length - 11; i--) {//逆順に表示
+    for (let i = allDiary.length - 1; i > 0; i--) {//逆順に表示
         //リストに表示
         if (0 <= i) {
             if (allDiary[i].num) {
                 if (allDiary[i].tag) {
-                    tagItem = allDiary[i].tag;
+                    tagItem = "#" + allDiary[i].tag;
                 } else {
                     tagItem = "";
                 }
@@ -74,8 +72,6 @@ const initDisplay = () => {
         htmlTagItems += "<li><input type='checkbox' name='tagGroup' id='boxTag" + i + "' value=" + allTags[i].name + "><label for='boxTag" + i + "'>" + allTags[i].name + "</label></li>";
     }
     $("#tagCheckBox").html(htmlTagItems);
-
-
 }
 
 const setObjToLocalStorage = (key, ojb) => {

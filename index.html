@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>diary</title>
+  <title>Tag Diary</title>
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/sanitize.css">
   <link rel="stylesheet" href="css/stylesheet.css">
@@ -13,17 +13,18 @@
 
 <body>
   <header>
-    <h1>diary</h1>
+    <h1>Tag Diary</h1>
   </header>
 
   <main>
     <div class="menu">
       <ul class="menuList">
-        <li><a href="./html/test.html">🔖メモテンプレートの編集</a></li>
-        <li>#タグテンプレートの編集</li>
-        <li>❓使い方</li>
-        <li>🔍検索</li>
-        <li>⚠日記の削除</li>
+        <!-- <li><a>🔖メモテンプレートの編集</a></li> -->
+        <!-- <li>#タグテンプレートの編集</li> -->
+        <li><a href="./html/使い方.html">❓使い方</a></li>
+        <!-- <li>🔍検索</li> -->
+        <li id="delStorage">⚠日記の削除</li>
+        <li id="debugDummy">ダミーデータの追加(debug)</li>
       </ul>
     </div>
     <div class="todayMemoArea">
@@ -40,9 +41,9 @@
     </div>
 
     <div class="history">
-      <div>Story of my life</div>
 
       <!-- <div>切り替えボタン</div> -->
+      <div class="diaryTitle">STORY OF MY LIFE</div>
       <div class="switchView">
         <div class="historyList">
           <ul id="historyListItems"></ul>
