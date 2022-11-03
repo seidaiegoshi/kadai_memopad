@@ -30,10 +30,11 @@
       <div class="todayMemo">
         <div><span id="today"></span>のメモ</div>
         <textarea id="inputTodayMemo"></textarea>
-        <textarea id="inputTodayTags"></textarea>
-        <button id="recordButton">記録する</button>
+        <button id="buttonRecord">記録する</button>
       </div>
       <div class="selectTagArea">
+        <input type="text" id="inputTodayTags">
+        <button id="buttonAddTag">追加</button>
         <ul id="tagCheckBox"></ul>
       </div>
     </div>
@@ -52,7 +53,9 @@
   </main>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="JavaScript/LocalStrage.js"></script>
+  <script src="JavaScript/LocalStorage.js"></script>
+  <script src="JavaScript/TagButton.js"></script>
+  <script src="JavaScript/script.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+// initSelectedTagArea();
 // ゴミを消すよう
 // localStorage.removeItem("diary");
 // localStorage.removeItem("allTags");
@@ -69,6 +70,7 @@ const setTodayMemo = () => {
     if (allDiary[0]) {
         if (allDiary[allDiary.length - 1].date == today) {
             $("#inputTodayMemo").text(allDiary[allDiary.length - 1].memo);
+
             $("#inputTodayTags").text(allDiary[allDiary.length - 1].tag);
         }
     }
@@ -91,91 +93,19 @@ const initDisplay = () => {
         allTags = dummyTags;
     };
 
-    setHistoryList();
     setTodayMemo();
+    setHistoryList();
 
     //タグリスト処理
     let htmlTagItems = "";
     for (let i = 0; i < allTags.length; i++) {
-        htmlTagItems += "<li><input type='checkbox' id='boxTag" + i + "'><label for='boxTag" + i + "'>" + allTags[i].name + "</label></li>";
+        htmlTagItems += "<li><input type='checkbox' name='tagGroup' id='boxTag" + i + "' value=" + allTags[i].name + "><label for='boxTag" + i + "'>" + allTags[i].name + "</label></li>";
     }
     $("#tagCheckBox").html(htmlTagItems);
+
 
 }
 
 const setObjToLocalStorage = (key, ojb) => {
     localStorage.setItem(key, JSON.stringify(ojb));
 }
-
-//-------------
-//処理ゾーン
-//-------------
-initDisplay();
-//-------------
-//ボタンを押したときの処理
-//-------------
-$("#recordButton").on("click", () => {
-    const memo = $("#inputTodayMemo").val();
-    const textAreaTag = $("#inputTodayTags").val();
-
-    //新しいタグをタグリストに追加する。
-    const splittedTagsList = textAreaTag.split(/,|#|\s|\n|\t/);
-    for (let i = 0; i < splittedTagsList.length; i++) {
-        if (splittedTagsList[i]) {//splitの連続による空白を除外
-            //記入したタグが既存のタグ一覧に存在するかどうか
-            let isExist = false;
-            for (let j = 0; j < allTags.length; j++) {
-                if (splittedTagsList[i] == allTags[j].name) {
-                    isExist = true;
-                }
-            }
-            //含まれていなかったら登録する。
-            if (!isExist) {
-                allTags.push({
-                    num: allTags.length,
-                    name: splittedTagsList[i],
-                })
-            }
-        }
-    }
-
-    //今日の日記をオブジェクト化
-    if (allDiary[0]) {
-        todayObject = {
-            num: allDiary.length,
-            date: today,
-            memo: memo,
-            tag: splittedTagsList,
-        };
-    } else {//初めて記録する場合
-        todayObject = {
-            num: 0,
-            date: today,
-            memo: memo,
-            tag: splittedTagsList,
-        };
-    }
-
-    //今日の日記データを全日記配列に入れる。
-    if (allDiary[0]) {
-        if (allDiary[allDiary.length - 1].date == today) {//日記配列に今日のデータを追加
-            allDiary[allDiary.length - 1] = todayObject;
-        }
-        else {
-            allDiary.push(todayObject);
-        }
-    } else {
-        allDiary.push(todayObject);
-    }
-
-    //日記データをローカルストレージに入れる。
-    setObjToLocalStorage("diary", allDiary);
-    // setObjToLocalStorage("diary", dummyDiary);//!debug
-    setObjToLocalStorage("allTags", allTags);
-
-    initDisplay();
-
-});
-
-
-

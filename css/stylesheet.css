@@ -33,30 +33,30 @@ header {
 
 .todayMemoArea {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    width: 98%;
+    margin: 20px auto;
+    border: 1px solid #eee;
 }
 
+/* メモエリア(左側) */
 .todayMemo {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 58%;
 }
 
 .todayMemo #inputTodayMemo {
-    width: 500px;
+    width: 96%;
     height: 200px;
     padding: 2px;
     border: 1px solid black;
     margin: 10px;
 }
 
-.todayMemo #inputTodayTags {
-    width: 500px;
-    padding: 2px;
-    border: 1px solid black;
-    margin: 10px;
-}
+
 
 .todayMemo button {
     border: 1px solid black;
@@ -71,6 +71,22 @@ header {
     height: 300px;
     overflow: scroll;
     border: 1px solid #ccc;
+    width: 40%;
+    margin: 4px;
+}
+
+#inputTodayTags {
+    background-color: white;
+    padding: 2px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+#buttonAddTag {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1px 3px;
+    margin: 5px;
 }
 
 #tagCheckBox {
@@ -106,8 +122,14 @@ header {
 }
 
 /* リスト表示 */
+.switchView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .historyList {
-    max-width: 80%;
+    max-width: 95%;
 }
 
 .historyList li {
