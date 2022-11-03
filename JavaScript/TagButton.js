@@ -33,23 +33,27 @@ const recordAllTags = () => {
 }
 
 const initSelectedTagArea = () => {
-    const todayTagList = allDiary[allDiary.length - 1].tag;
-    console.log(todayTagList);
-
     let allTagArr = [];
+    if (allDiary[0]) {
 
-    $('#tagCheckBox').find('label').each(function (index, element) {
-        allTagArr.push(element.textContent);
-        // console.log(index);
-    })
+        const todayTagList = allDiary[allDiary.length - 1].tag;
+        // console.log(todayTagList);
 
-    for (let i = 0; i < todayTagList.length; i++) {
-        if (todayTagList[i]) {//splitの連続による空白を除外
-            //記入したタグが既存のタグ一覧に存在するかどうか
-            let isExist = false;
-            for (let j = 0; j < allTagArr.length; j++) {
-                if (todayTagList[i] == allTagArr[j]) {
-                    $("input[id='boxTag" + j + "']").prop("checked", true);
+
+
+        $('#tagCheckBox').find('label').each(function (index, element) {
+            allTagArr.push(element.textContent);
+            // console.log(index);
+        })
+
+        for (let i = 0; i < todayTagList.length; i++) {
+            if (todayTagList[i]) {//splitの連続による空白を除外
+                //記入したタグが既存のタグ一覧に存在するかどうか
+                let isExist = false;
+                for (let j = 0; j < allTagArr.length; j++) {
+                    if (todayTagList[i] == allTagArr[j]) {
+                        $("input[id='boxTag" + j + "']").prop("checked", true);
+                    }
                 }
             }
         }

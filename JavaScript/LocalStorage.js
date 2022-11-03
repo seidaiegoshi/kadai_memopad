@@ -1,31 +1,4 @@
-// initSelectedTagArea();
-// ゴミを消すよう
-// localStorage.removeItem("diary");
-// localStorage.removeItem("allTags");
-const dummyDiary = [//!debug
-    { num: 0, date: "2022/10/1(火)", memo: "aaa" },
-    { num: 1, date: "2022/10/2(水)", memo: "aaafff" },
-    { num: 2, date: "2022/10/3(木)", memo: "fdsfsdfsdf" },
-    { num: 3, date: "2022/10/4(木)", memo: "fdsfsdfsdf" },
-    { num: 4, date: "2022/10/5(木)", memo: "fdsfsdfsdf" },
-    { num: 5, date: "2022/10/6(木)", memo: "fdsfsdfsdf" },
-    { num: 6, date: "2022/10/7(木)", memo: "fdsfsdfsdf" },
-    { num: 7, date: "2022/10/8(木)", memo: "fdsfsdfsdf" },
-    { num: 8, date: "2022/10/9(木)", memo: "fdsfsdfsdf" },
-    { num: 9, date: "2022/10/10(木)", memo: "fdsfsdfsdf" },
-    { num: 10, date: "2022/11/1(水)", memo: "gfjksdgjkdfsgdfkgjdffdasfjndsfkdsfldskfdsalfasdgpihjnfpgiodjfmgldkgndflkgndaflgkdnlkdfnds@kldnsgdslkgndsgkdsgmdlvsagdsalkvmdsglsgjsdfngjsfdgnsakfldsmfkldgndslkgndsgklsdngkldsnglkds:ngdkls:ngla:sgldksnglk:sdangkldsanglkdsnfdlksfndslkfdsondsgodsgnsogdslkagndsalgadgndaglndagjangagnadjgkndgkdagndagnd;gndklgndnfakgdfjgdlfs" },
-];
 
-const dummyTags = [
-    { num: 1, name: "test1" },
-    { num: 3, name: "test2" },
-    { num: 2, name: "test3" },
-    { num: 4, name: "test4" },
-    { num: 5, name: "test15" },
-    { num: 6, name: "test6" },
-    { num: 7, name: "test77" },
-    { num: 8, name: "test8" },
-]
 
 //-------------
 //初期化処理
@@ -47,6 +20,7 @@ const setHistoryList = () => {
     let historyList = "";
     let tagItem = "";
 
+    // console.log(allDiary);
     // 履歴リストを表示
     for (let i = allDiary.length - 1; i > allDiary.length - 11; i--) {//逆順に表示
         //リストに表示
@@ -57,8 +31,7 @@ const setHistoryList = () => {
                 } else {
                     tagItem = "";
                 }
-
-                historyList += "<li><p class=historyListDate>" + allDiary[i].num + ",\t" + allDiary[i].date + "</p><p class=historyListTags>" + tagItem + "</p><p class='historyListMemo'>" + allDiary[i].memo + "</p></li>";//TODO :最後にnum消す
+                historyList += "<li><p class=historyListDate>" + allDiary[i].date + "</p><p class=historyListTags>" + tagItem + "</p><p class='historyListMemo'>" + allDiary[i].memo + "</p></li>";
             }
         }
     };
@@ -90,7 +63,6 @@ const initDisplay = () => {
         allTags = JSON.parse(localStorage.getItem("allTags"));
     } else {
         allTags = [];
-        allTags = dummyTags;
     };
 
     setTodayMemo();
