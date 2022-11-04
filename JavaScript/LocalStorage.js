@@ -68,3 +68,5 @@ const initDisplay = () => {
 const setObjToLocalStorage = (key, ojb) => {
     localStorage.setItem(key, JSON.stringify(ojb));
 }
+
+

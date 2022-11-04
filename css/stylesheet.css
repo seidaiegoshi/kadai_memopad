@@ -33,6 +33,11 @@ header {
     border-radius: 5px;
 }
 
+
+#debugDummy {
+    display: none;
+}
+
 /* 今日の日記ゾーン
 -------------*/
 
