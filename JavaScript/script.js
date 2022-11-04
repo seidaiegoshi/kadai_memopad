@@ -183,3 +183,12 @@ $("#buttonAddTag").on("click", () => {
         $("#buttonRecord").prop("disabled", false);
     });
 });
+
+//!debugMode
+let debugMode = false;
+const debugModeSwitch = () => {
+    if (debugMode) {
+        $("#debugDummy").css("display", "inline-block")
+    }
+};
+setInterval(debugModeSwitch, 100);
