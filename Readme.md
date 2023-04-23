@@ -5,4 +5,7 @@
 ローカルストレージを用いているので、いろんなデバイスで、とかは無理・・・？
 
 ## 使用
+debugMode=true;
+をコンソールで入力すると、ダミーデータを確認できます
+
 https://seidaiegoshi.github.io/kadai_memopad/
